@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Box, Typography, AppBar, Toolbar, Button } from '@mui/material'
 import { SignIn, SignUp } from '@clerk/nextjs'
 import Link from 'next/link'
+import { orange } from '@mui/material/colors';
 
 export default function SignUpPage() {
   // ... (component body)
@@ -10,7 +11,7 @@ export default function SignUpPage() {
 
   return(
     <Container maxWidth="100vm">
-  <AppBar position="static" sx={{backgroundColor: '#3f51b5'}}>
+  <AppBar position="static" sx={{ backgroundColor: orange[500] }}>
   <Toolbar>
     <Typography variant="h6" sx={{flexGrow: 1}}>
       Flashcard SaaS

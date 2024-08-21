@@ -16,7 +16,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  AppBar,
+  AppBar,Snackbar,Alert,
   Toolbar,
   Paper,
   CardActionArea,
@@ -39,10 +39,15 @@ export default function Generate() {
   const [flipped, setFlipped] = useState({});
   const [setName, setSetName] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
   const router = useRouter();
 
   const handleOpenDialog = () => setDialogOpen(true);
   const handleCloseDialog = () => setDialogOpen(false);
+
+  const handleSnackbarClose = () => setSnackbarOpen(false);
+
 
   const handleSubmit = async () => {
     fetch('/api/generate', {
@@ -65,8 +70,9 @@ export default function Generate() {
   };
 
   const saveFlashcards = async () => {
+     
     if (!isLoaded || !isSignedIn) {
-      console.log("User not loaded or not signed in");
+      setSnackbarOpen(true);
       return;
     }
 
@@ -260,6 +266,19 @@ export default function Generate() {
           </DialogActions>
         </Dialog>
       </Container>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="warning"
+          sx={{ width: "100%" }}
+        >
+          You cannot save without logging in. Please login/sign up to save your flashcards.
+        </Alert>
+      </Snackbar>
     </>
   );
 }
